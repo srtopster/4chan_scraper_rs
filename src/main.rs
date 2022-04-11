@@ -9,11 +9,16 @@ use reqwest;
 use colored::*;
 
 async fn download(path: &str,board: &str,tim: &str,filename: &str,ext: &str,post_count: &str){
+    let filepath = Path::new(path).join(format!("{}{}",filename,ext));
+    if filepath.exists(){
+        println!("[{}][{}][Existente]{}",post_count,"100%".green(),format!("{}{}",filename,ext).green());
+        return
+    }
     let resp = reqwest::get(format!("https://i.4cdn.org/{}/{}{}",board,tim,ext)).await.unwrap();
     let size = resp.content_length().unwrap() as f64;
     let mut stream = resp.bytes_stream();
 
-    let mut file = File::create(Path::new(path).join(format!("{}{}",filename,ext))).unwrap();
+    let mut file = File::create(filepath).unwrap();
     let mut done: f64 = 0.0;
     while let Some(item) = stream.next().await {
         let chunk = item.or(Err(format!("Erro ao baixar"))).unwrap();
