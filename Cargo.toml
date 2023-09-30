@@ -9,7 +9,7 @@ edition = "2021"
 reqwest = {version = "0.11", features = ["stream"]}
 futures = "0.3"
 futures-util = "0.3.21"
-tokio = { version = "1", features = ["full"] }
+tokio = { version = "1.32.0", features = ["full"] }
 serde_json = "1.0"
 colored = "2"
 enable_cmd_ansi_colors = {git="https://github.com/srtopster/enable_cmd_ansi_colors"}

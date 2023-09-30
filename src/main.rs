@@ -18,7 +18,7 @@ async fn download(path: PathBuf,board: &str,images: Vec<ImageInfo>){
     let req_client = Client::new();
     let post_count = images.len();
     for (index,image) in images.iter().enumerate() {
-        let filepath = path.join(format!("{}.{}",image.filename,image.ext));
+        let filepath = path.join(format!("{}{}",image.filename,image.ext));
         if filepath.exists() {
             println!("[{}][{}][Existente]{}",format!("{}/{}",index+1,post_count),"100%".green(),format!("{}{}",image.filename,image.ext).green());
             continue;
